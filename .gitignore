@@ -3,3 +3,4 @@ env
 manage.py
 diveondown/wsgi.py
 static
+media
