@@ -1,4 +1,4 @@
-{% load static wagtailuserbar %}
+{% load static wagtailuserbar wagtailimages_tags %}
 
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -29,7 +29,15 @@
 
     <body class="{% block body_class %}{% endblock %}">
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a class="navbar-brand" href="#"><img src="snorkel.png"> dive on down</a>
+
+            <a class="navbar-brand" href="/">
+                {% if settings.site_settings.SocialMediaAndLogoSettings.logo %}
+                    {% image settings.site_settings.SocialMediaAndLogoSettings.logo fill-32x32 as img %}
+                    <img src="{{img.url}}">
+                {% endif %}
+                {% if settings.site_settings.SocialMediaAndLogoSettings.site_name %}
+                    {{ settings.site_settings.SocialMediaAndLogoSettings.site_name }}
+                {% endif %}</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -47,16 +55,26 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
+                    {% if settings.site_settings.SocialMediaAndLogoSettings.instagram %}
                     <li class="mx-2 fa-2x">
-                        <span class="bob">
-                            <a class="bob nav-link" href="#"><i class="fab fa-instagram"></i></a>
-                        </span>
+                            <a class="nav-link" href="{{ settings.site_settings.SocialMediaAndLogoSettings.instagram }}"><i class="fab fa-instagram"></i></a>
                     </li>
+                    {% endif %}
+                    {% if settings.site_settings.SocialMediaAndLogoSettings.reddit %}
                     <li class="mx-2 fa-2x">
-                        <span class="bob">
-                            <a class="bob nav-link" href="#"><i class="fab fa-reddit"></i></a>
-                        </span>
+                            <a class="nav-link" href="{{ settings.site_settings.SocialMediaAndLogoSettings.reddit }}"><i class="fab fa-reddit"></i></a>
                     </li>
+                    {% endif %}
+                    {% if settings.site_settings.SocialMediaAndLogoSettings.youtube %}
+                    <li class="mx-2 fa-2x">
+                            <a class="nav-link" href="{{ settings.site_settings.SocialMediaAndLogoSettings.youtube }}"><i class="fab fa-reddit"></i></a>
+                    </li>
+                    {% endif %}
+                    {% if settings.site_settings.SocialMediaAndLogoSettings.twitter %}
+                    <li class="mx-2 fa-2x">
+                            <a class="nav-link" href="{{ settings.site_settings.SocialMediaAndLogoSettings.twitter }}"><i class="fab fa-reddit"></i></a>
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>
