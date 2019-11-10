@@ -22,6 +22,13 @@ class HomePage(Page):
         on_delete=models.SET_NULL,
         related_name="+",
     )
+    featured_blog_post = models.ForeignKey(
+        "wagtailcore.page",
+        null=True,
+        blank=True,
+        related_name="+",
+        on_delete=models.SET_NULL,
+    )
     content_panels = Page.content_panels + [
     MultiFieldPanel(
         [
@@ -32,4 +39,6 @@ class HomePage(Page):
             ImageChooserPanel("banner_image"),
         ],
         heading="Banner Options",
-    ),]
+
+    ),
+    PageChooserPanel("featured_blog_post"),]
