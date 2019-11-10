@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'search',
     'site_settings',
     'about',
+    'blog',
 
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
 
     'modelcluster',
     'taggit',
+    'django_extensions',
 
     'django.contrib.admin',
     'django.contrib.auth',
