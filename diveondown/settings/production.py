@@ -33,18 +33,20 @@ DATABASES = {
         'PORT': '',
     }
 }
-"""
+
 # AWS
-AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
-AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+DOD_AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+DOD_AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+DOD_AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
 AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
 AWS_DEFAULT_ACL = None
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = 'https://' + '.s3.amazonaws.com/' + 'media/'
-
+# remove when hook up email
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+"""
 # Mail settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = os.environ['MG_HOST']
