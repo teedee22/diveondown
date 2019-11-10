@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load static wagtailimages_tags wagtailcore_tags %}
+
+
+{% block content %}
+<!-- Banner and title -->
+{% image self.banner_image fill-4000x1000-c100 as img %}
+<div class="container-fluid" style="background-image: url('{{img.url}}'); background-size: cover;">
+    <div class="jumbotron bg-transparent">
+        <div class="">
+            <h1 class="display-1 text-light text-center banner-title">{{ self.banner_title }}</h1>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <p style="color:white;"> {{ self.intro_text|richtext }}</p>
+</div>
+
+<div class="container">
+    <!-- For the first loop counter I've reversed the order of the columns so that on mobile categories appears on top -->
+    <div class="row flex-md-row-reverse">
+        <div class="col-md-3 mx-auto">
+            <h1>Categories</h1>
+            {% for category in categories %}
+                <a style="display: block;" href="/blog/?category={{ category.slug }}"> {{ category }}</a>
+            {% endfor %}
+
+        </div>
+        <div class="col-md-9">
+            {% for blogitem in posts %}
+                <div class="row flex-md-row-reverse">
+                    <div class="col-md-8">
+                        <a href="{{ blogitem.url }}"><h3>{{ blogitem.title }}</h3></a>
+                        <p>{{ blogitem.description }}</p>
+                        <p class="post-meta">Posted by
+                            <a href="#">{{ blogitem.author }}</a>
+                            {{ blogitem.last_published_at.date }}
+                        </p>
+                    </div>
+                    <div class="col-md-4 my-2 mx-auto text-center">
+                        <a href="{{ blogitem.url }}">
+                            {% image blogitem.banner_image fill-300x200-c100 as img3 %}
+                            <img class="img-fluid rounded mb-3 mb-md-0" src="{{ img3.url }}" alt="{{ img3.alt }}">
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <hr>
+</div>
+ <!-- Add pagination -->
+<div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+        {% if posts.paginator.num_pages > 1 %}
+            <ul class="pagination justify-content-center">
+                {% if posts.has_previous %}
+                    <li class="page-item">
+                        <a href="?page={{ posts.previous_page_number }}" class="page-link text-secondary">
+                            Back
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% for page_num in posts.paginator.page_range %}
+                    <li class="page-item">
+                        <a href="?page={{ page_num }}" class="page-link text-secondary {% if page_num == posts.number %} text-light bg-dark {% endif %}">
+                            {{ page_num }}
+                        </a>
+                    </li>
+                {% endfor %}
+
+                {% if posts.has_next %}
+                    <li class="page-item">
+                        <a href="?page={{ posts.next_page_number }}" class="page-link text-secondary">
+                            Next
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock content %}

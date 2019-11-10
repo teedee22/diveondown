@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static wagtailimages_tags wagtailcore_tags %}
+
+
+{% block content %}
+<!-- Banner and title -->
+{% image self.banner_image fill-4000x1000-c100 as img %}
+<div class="container-fluid" style="background-image: url('{{img.url}}'); background-size: cover;">
+    <div class="jumbotron bg-transparent">
+        <div class="">
+            <h1 class="display-1 text-light text-center banner-title">{{ self.custom_title }}</h1>
+            <h2 class="display-5 text-light banner-title"> written by {{ self.author }}, {{ self.last_published_at.date }}
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row flex-md-row-reverse my-5">
+        <!-- For the panel on the right, -->
+        <div class="col-md-3 mx-auto my-3">
+            <div class="row">
+                <div class="col">
+                    <h2 class="text-center">Categories</h2>
+                    {% for category in categories %}
+                        <a style="display: block;"{% if category not in self.category.all %}class="text-muted"{% endif %} href="/blog/?category={{ category.slug }}"> {{ category }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="row my-3">
+                <div class="col">
+                    <h2 class="text-center">Related</h2>
+                    {% for post in related %}
+                        <a href="{{ post.url }}">{{ post.title }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!-- For the panel on the left -->
+        <div class="col-md-9">
+            <!-- Post Content -->
+            <article class="my-2">
+                <h4>{{ self.description }}</h4>
+                {{ self.streams|richtext }}
+            </article>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
