@@ -20,19 +20,22 @@
 </h1>
 <!-- Project One -->
 <div class="row">
-<div class="col-md-7">
-<a href="{{ self.featured_blog_post.specific.url }}">
-{% image self.featured_blog_post.specific.banner_image fill-800x400 as img2 %}
-<img class="img-fluid rounded mb-3 mb-md-0" src="{{ img2.url }}" alt="{{ img2.alt }}">
-</a>
-</div>
-<div class="col-md-5">
-<div class="post-preview">
-<a href="{{ self.featured_blog_post.specific.url }}"><h2 class="post-title">{{ self.featured_blog_post }}</h2>
-<h3 class="post-subtitle">{{ self.featured_blog_post.specific.description }}</h3></a>
-<div class="text-center"><a class="btn btn-light" href="{{ self.featured_blog_post.specific.url }}">Read more</a></div>
-</div>
-</div>
+    <div class="col-md-7">
+        <a href="{{ self.featured_blog_post.specific.url }}">
+            {% image self.featured_blog_post.specific.banner_image fill-800x400 as img2 %}
+            <img class="img-fluid rounded mb-3 mb-md-0" src="{{ img2.url }}" alt="{{ img2.alt }}">
+        </a>
+    </div>
+    <div class="col-md-5">
+        <div class="post-preview">
+            <a href="{{ self.featured_blog_post.specific.url }}"><h2 class="post-title display-5">{{ self.featured_blog_post }}</h2>
+                <p>{{ self.featured_blog_post.specific.description }}<p>
+            </a>
+            <div class="text-center">
+                <a class="btn btn-light" href="{{ self.featured_blog_post.specific.url }}">Read more</a>
+            </div>
+        </div>
+    </div>
 </div>
 </div>
 <hr>

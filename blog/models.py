@@ -154,7 +154,7 @@ class BlogDetailPage(Page):
             BlogDetailPage.objects.public()
             .live()
             .filter(category__name__in=current_cat)
-            .order_by("-first_published_at")[:2]
+            .order_by("-first_published_at").not_page(self)[:2]
         )
         context["related"] = related
 

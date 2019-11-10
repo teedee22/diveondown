@@ -38,7 +38,7 @@
                             {{ blogitem.last_published_at.date }}
                         </p>
                     </div>
-                    <div class="col-md-4 my-2 mx-auto text-center">
+                    <div class="col-md-4 my-1 mx-auto text-center">
                         <a href="{{ blogitem.url }}">
                             {% image blogitem.banner_image fill-300x200-c100 as img3 %}
                             <img class="img-fluid rounded mb-3 mb-md-0" src="{{ img3.url }}" alt="{{ img3.alt }}">
