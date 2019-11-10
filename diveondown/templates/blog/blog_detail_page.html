@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static wagtailimages_tags wagtailcore_tags %}
+{% load static wagtailimages_tags wagtailcore_tags blogapp_tags %}
 
 
 {% block content %}
@@ -43,6 +43,7 @@
                 <h4>{{ self.description }}</h4>
                 {{ self.streams|richtext }}
             </article>
+            {% show_comments %}
         </div>
     </div>
 </div>
