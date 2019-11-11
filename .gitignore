@@ -5,3 +5,4 @@ diveondown/wsgi.py
 /static
 media
 diveondown.log
+db.sqlite3

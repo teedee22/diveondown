@@ -160,3 +160,5 @@ WAGTAIL_SITE_NAME = "diveondown"
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 BASE_URL = 'http://diveondown.com'
+
+ROBOTS_USE_SCHEME_IN_HOST = True
