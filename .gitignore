@@ -2,5 +2,5 @@ env
 *pycache*
 manage.py
 diveondown/wsgi.py
-static
+/static
 media
