@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'wagtail.contrib.redirects',
     'wagtail.contrib.settings',
     'wagtail.contrib.modeladmin',
+    'wagtail.contrib.sitemaps',
     'wagtailmenus',
     'wagtail.embeds',
     'wagtail.sites',
@@ -48,6 +49,7 @@ INSTALLED_APPS = [
     'modelcluster',
     'taggit',
     'django_extensions',
+    'robots',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -55,6 +57,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sitemaps',
     'storages',
 ]
 
