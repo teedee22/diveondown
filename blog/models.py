@@ -3,16 +3,17 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 from django_extensions.db.fields import AutoSlugField
 
-from modelcluster.fields import ParentalManyToManyField
+from modelcluster.fields import ParentalManyToManyField, ParentalKey
 
 from wagtail.admin.edit_handlers import (
     FieldPanel,
     MultiFieldPanel,
-    StreamFieldPanel,
+    InlinePanel,
 )
-from wagtail.core.fields import RichTextField, StreamField
-from wagtail.core.models import Page
+from wagtail.core.fields import RichTextField
+from wagtail.core.models import Page, Orderable
 from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.snippets.models import register_snippet
 
 #from streamfs import blocks
@@ -39,6 +40,64 @@ class BlogCategory(models.Model):
         verbose_name = "Blog category"
         verbose_name_plural = "Blog categories"
         ordering = ["name"]
+
+
+@register_snippet
+class BlogAuthor(models.Model):
+    """Blog author for snippets."""
+
+    name = models.CharField(max_length=100)
+    description = RichTextField(features=[], null=True, blank=True)
+    image = models.ForeignKey(
+        "wagtailimages.Image",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=False,
+        related_name="+",
+    )
+    reddit_url = models.URLField(blank=True, null=True, help_text="Reddit URL")
+    instagram_url = models.URLField(blank=True, null=True, help_text="Instagram URL")
+    youtube_url = models.URLField(blank=True, null=True, help_text="Youtube URL")
+    panels = [
+        MultiFieldPanel(
+            [
+                FieldPanel("name"),
+                ImageChooserPanel("image"),
+                FieldPanel("description"),
+            ],
+            heading="Name and Image",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel("reddit_url"),
+                FieldPanel("instagram_url"),
+                FieldPanel("youtube_url"),
+            ],
+            heading="Social",
+        ),
+    ]
+
+    def __str__(self):
+        """str repr of this class"""
+        return self.name
+
+    class Meta:  # noqa
+        verbose_name = "Blog Author"
+        verbose_name_plural = "Blog Authors"
+
+
+class BlogAuthorsOrderable(Orderable):
+    """This allows us to select one or more blog authors from snippets"""
+
+    page = ParentalKey("blog.BlogDetailPage", related_name="blog_authors")
+    author = models.ForeignKey(
+        "blog.BlogAuthor",
+        on_delete=models.CASCADE,
+    )
+
+    panels = [
+        SnippetChooserPanel("author"),
+    ]
 
 
 class BlogListingPage(Page):
@@ -122,7 +181,6 @@ class BlogDetailPage(Page):
         related_name="+",
         on_delete="models.SET_NULL",
     )
-    author = models.CharField(max_length=100, blank=True, null=True)
     """
     streams = StreamField(
         [
@@ -165,10 +223,15 @@ class BlogDetailPage(Page):
             [
                 FieldPanel("custom_title"),
                 FieldPanel("description"),
-                FieldPanel("author"),
                 ImageChooserPanel("banner_image"),
             ],
             heading="Blog page information",
+        ),
+        MultiFieldPanel(
+            [
+                InlinePanel("blog_authors", label="Author", min_num=1, max_num=10),
+            ],
+            heading="Author(s)"
         ),
         FieldPanel("category", widget=forms.CheckboxSelectMultiple),
         FieldPanel("streams"),

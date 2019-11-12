@@ -9,7 +9,7 @@
     <div class="jumbotron bg-transparent">
         <div class="">
             <h1 class="display-3 text-light text-center banner-title">{{ self.custom_title }}</h1>
-            <h2 class="display-5 text-light banner-title"> written by {{ self.author }}, {{ self.last_published_at.date }}
+            <h2 class="display-5 text-light banner-title"> Published {{ self.last_published_at.date }}
                 <br><br>
         </div>
     </div>
@@ -43,7 +43,39 @@
                 <h4>{{ self.description }}</h4>
                 {{ self.streams|richtext }}
             </article>
-            <div class="sharethis-inline-share-buttons"></div>
+            <!-- author -->
+            <hr>
+            <div class="container-fluid my-3">
+                {% for author in self.blog_authors.all %}
+                <div class="row justify-content-center">
+                    <h1 class="text-center">{{ author.author.name }}</h1>
+                </div>
+                <div class="row">
+                    <div class="col-sm-5 my-2">
+                        {% image author.author.image fill-640x480 as authorimage %}
+                        <img class="img-fluid rounded mb-3 mb-md-0" src="{{ authorimage.url }}" alt="{{ authorimage.alt }}">
+                    </div>
+                    <div class="col-sm-7">
+                        {{ author.author.description|richtext }}
+                        <div class="text-center">
+                                {% if author.author.instagram_url %}
+                                <a class="text-center help-social help-social-instagram" target="_blank" href="{{ author.author.instagram_url }}"><i class="fa-3x fab fa-instagram"></i></a>
+                                {% endif %}
+                                {% if author.author.reddit_url %}
+                                <a class="text-center help-social help-social-reddit" target="_blank" href="{{ author.author.reddit_url }}"><i class="fa-3x fab fa-reddit"></i></a>
+                                {% endif %}
+                                {% if author.author.youtube_url %}
+                                <a class="text-center" target="_blank" href="{{ author.author.youtube_url }}"><i class="reddit fa-3x fab fa-reddit"></i></a>
+                                {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <hr>
+            <!-- Share buttons -->
+            <div class=" my-3 sharethis-inline-share-buttons"></div>
+            <!-- comments from disqus -->
             {% show_comments %}
         </div>
     </div>
