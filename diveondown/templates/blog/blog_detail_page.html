@@ -50,7 +50,9 @@
                     </div>
                 </div>
 
-                {{ self.streams|richtext }}
+                {% for block in page.streams %}
+                    {% include_block block %}
+                {% endfor %}
             </article>
             <!-- author -->
             <hr>

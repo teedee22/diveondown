@@ -9,14 +9,15 @@ from wagtail.admin.edit_handlers import (
     FieldPanel,
     MultiFieldPanel,
     InlinePanel,
+    StreamFieldPanel,
 )
-from wagtail.core.fields import RichTextField
+from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Page, Orderable
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.snippets.models import register_snippet
 
-#from streamfs import blocks
+from streams import blocks
 
 
 @register_snippet
@@ -183,17 +184,13 @@ class BlogDetailPage(Page):
     )
     quick_facts = RichTextField(blank=True, null=True)
 
-    """
     streams = StreamField(
         [
             ("full_richtext", blocks.RichTextBlock()),
-            ("code_block", blocks.CodeBlock()),
-            ("single_image", blocks.SingleImageBlock()),
         ],
         null=True,
         blank=True,
-    )"""
-    streams = RichTextField(null=True, blank=True)
+    )
 
     category = ParentalManyToManyField("blog.BlogCategory", blank=True)
 
@@ -237,7 +234,7 @@ class BlogDetailPage(Page):
         ),
         FieldPanel("category", widget=forms.CheckboxSelectMultiple),
         FieldPanel("quick_facts"),
-        FieldPanel("streams"),
+        StreamFieldPanel("streams"),
     ]
 
     @property
