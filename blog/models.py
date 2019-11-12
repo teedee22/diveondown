@@ -181,6 +181,8 @@ class BlogDetailPage(Page):
         related_name="+",
         on_delete="models.SET_NULL",
     )
+    quick_facts = RichTextField(blank=True, null=True)
+
     """
     streams = StreamField(
         [
@@ -234,6 +236,7 @@ class BlogDetailPage(Page):
             heading="Author(s)"
         ),
         FieldPanel("category", widget=forms.CheckboxSelectMultiple),
+        FieldPanel("quick_facts"),
         FieldPanel("streams"),
     ]
 
