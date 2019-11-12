@@ -43,9 +43,13 @@
                 <h4>{{ self.description }}</h4>
                 {{ self.streams|richtext }}
             </article>
+            <div class="sharethis-inline-share-buttons"></div>
             {% show_comments %}
         </div>
     </div>
 </div>
 
+{% endblock %}
+{% block extra_js %}
+    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5dcaa82ca0875f0019f61abf&product=inline-share-buttons" async="async"></script>
 {% endblock %}
