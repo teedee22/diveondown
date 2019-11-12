@@ -187,6 +187,8 @@ class BlogDetailPage(Page):
     streams = StreamField(
         [
             ("full_richtext", blocks.RichTextBlock()),
+            ("large_image", blocks.SingleImageBlockLarge()),
+            ("small_image", blocks.SingleImageBlockSmall()),
         ],
         null=True,
         blank=True,
