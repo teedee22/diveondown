@@ -7,11 +7,10 @@
 {% image self.banner_image fill-4000x1000-c100 as img %}
 <div class="container-fluid" style="background-image: url('{{img.url}}'); background-size: cover;">
     <div class="jumbotron bg-transparent">
-        <div class="">
-            <h1 class="display-3 text-light text-center banner-title">{{ self.custom_title }}</h1>
-            <h2 class="display-5 text-light banner-title"> Published {{ self.last_published_at.date }}
-                <br><br>
+        <div class="my-5">
+            <h1 class="display-5 text-center banner-title-blogdetail my-5">{{ self.custom_title }}</h1>
         </div>
+
     </div>
 </div>
 
@@ -31,13 +30,22 @@
                 <div class="col">
                     <h2 class="text-center">Related</h2>
                     {% for post in related %}
-                        <a href="{{ post.url }}">{{ post.title }}</a>
+                    <div class="card bg-dark" style="width: 18rem;">
+                        {% image post.banner_image fill-300x200 as postimg %}
+                        <a href="{{ post.url }}"><img src="{{ postimg.url }}" class="card-img-top" alt="{{ postimg.alt }}"></a>
+                        <div class="card-body">
+                            <a href="{{ post.url }}"><h5 class="card-title text-light">{{ post.title }}</h5></a>
+                            <p class="card-text text-light">{{ post.description }}</p>
+                            <a href="{{ post.url }}" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
                     {% endfor %}
                 </div>
             </div>
         </div>
         <!-- For the panel on the left -->
         <div class="col-md-9 order-first order-md-last">
+            <h2> Published {{ self.last_published_at.date }}</h2>
             <!-- Post Content -->
             <article class="my-2">
                 <div class="row">

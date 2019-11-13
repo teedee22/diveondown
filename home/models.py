@@ -11,10 +11,7 @@ from wagtail.core.models import Page
 class HomePage(Page):
     template="home/home_page.html"
     max_count = 1
-    banner_title_1 = models.CharField(max_length=50, blank=True, null=True)
-    banner_title_2 = models.CharField(max_length=50, blank=True, null=True)
-    banner_title_3 = models.CharField(max_length=50, blank=True, null=True)
-    banner_title_4 = models.CharField(max_length=50, blank=True, null=True)
+    banner_subtitle = models.CharField(max_length=50, blank=True, null=True)
     banner_image = models.ForeignKey(
         "wagtailimages.Image",
         null=True,
@@ -32,10 +29,7 @@ class HomePage(Page):
     content_panels = Page.content_panels + [
     MultiFieldPanel(
         [
-            FieldPanel("banner_title_1"),
-            FieldPanel("banner_title_2"),
-            FieldPanel("banner_title_3"),
-            FieldPanel("banner_title_4"),
+            FieldPanel("banner_subtitle"),
             ImageChooserPanel("banner_image"),
         ],
         heading="Banner Options",
