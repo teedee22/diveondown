@@ -189,6 +189,7 @@ class BlogDetailPage(Page):
             ("full_richtext", blocks.RichTextBlock()),
             ("large_image", blocks.SingleImageBlockLarge()),
             ("small_image", blocks.SingleImageBlockSmall()),
+            ("youtube_video", blocks.YouTubeEmbedBlock()),
         ],
         null=True,
         blank=True,

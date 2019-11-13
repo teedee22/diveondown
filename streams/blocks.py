@@ -14,6 +14,7 @@ class RichTextBlock(blocks.RichTextBlock):
 
 
 class SingleImageBlockLarge(blocks.StructBlock):
+    """ Small Image """
     image = ImageChooserBlock(required=True)
     caption = blocks.CharBlock(required=False, null=True, max_length=250)
 
@@ -24,7 +25,7 @@ class SingleImageBlockLarge(blocks.StructBlock):
 
 
 class SingleImageBlockSmall(blocks.StructBlock):
-
+    """ Large Image"""
     image = ImageChooserBlock(required=True)
     caption = blocks.CharBlock(required=False, null=True, max_length=250)
 
@@ -32,3 +33,13 @@ class SingleImageBlockSmall(blocks.StructBlock):
         template = "streams/single_image_block_small.html"
         icon = "image"
         label = "Small Image"
+
+
+class YouTubeEmbedBlock(blocks.StructBlock):
+    """Youtube embed"""
+    embed_url = blocks.URLBlock(blank=True, null=False)
+
+    class Meta:
+        template = "streams/youtube_embed_block.html"
+        icon = "media"
+        label = "youtube embed"
