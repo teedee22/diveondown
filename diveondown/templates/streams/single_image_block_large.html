@@ -1,10 +1,9 @@
 {% load wagtailimages_tags %}
 {% image self.image fill-640x480 as img %}
-<div>
-    <div class="col">
-        <img class="img-fluid rounded" src="{{ img.url }}" alt="{{ img.alt }}">
-    </div>
-    <div class="col">
-        <p class=" font-italic caption muted">{{ self.caption }}</p>
-    </div>
+
+<div class="col">
+    <img class="img-fluid rounded" src="{{ img.url }}" alt="{{ img.alt }}">
+</div>
+<div class="col">
+    <p class=" font-italic caption muted">{{ self.caption }}</p>
 </div>

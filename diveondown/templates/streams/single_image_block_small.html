@@ -1,5 +1,6 @@
 {% load wagtailimages_tags %}
 {% image self.image fill-400x300 as img %}
+
 <div class="row mx-auto my-3">
     <div class="col-md-6">
         <img class="img-fluid rounded" src="{{ img.url }}" alt="{{ img.alt }}">
