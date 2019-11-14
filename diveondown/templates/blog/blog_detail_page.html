@@ -30,7 +30,7 @@
                 <div class="col">
                     <h2 class="text-center">Related</h2>
                     {% for post in related %}
-                    <div class="card bg-dark" style="width: 18rem;">
+                    <div class="card bg-dark my-3" style="width: 18rem;">
                         {% image post.banner_image fill-300x200 as postimg %}
                         <a href="{{ post.url }}"><img src="{{ postimg.url }}" class="card-img-top" alt="{{ postimg.alt }}"></a>
                         <div class="card-body">
