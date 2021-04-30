@@ -38,7 +38,7 @@ six==1.12.0
 sqlparse==0.3.0
 traitlets==4.3.3
 Unidecode==1.1.1
-urllib3==1.25.6
+urllib3==1.25.8
 wagtail==2.7
 wagtail-robots==0.1.2
 wagtailmenus==3.0
